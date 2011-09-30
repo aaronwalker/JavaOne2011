@@ -27,6 +27,7 @@
 
     <modules>
         <module>simple</module>
+        <module>simple-cdi</module>
     </modules>
     
     <properties>

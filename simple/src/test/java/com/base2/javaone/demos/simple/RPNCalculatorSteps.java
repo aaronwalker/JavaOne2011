@@ -22,10 +22,13 @@ public class RPNCalculatorSteps  {
         calculator = new RpnCalculator();
     }
 
-    @When("I add %no1 and %no4")
-    public void addNumbers(@Named("no1") Number no1, @Named("no2") Number no2) {
-        calculator.push(no1);
-        calculator.push(no2);
+    @When("I enter %num")
+    public void enterNumber(@Named("num")Number num) {
+        calculator.push(num);
+    }
+
+    @When("I press add")
+    public void add() {
         calculator.push("+");
     }
 

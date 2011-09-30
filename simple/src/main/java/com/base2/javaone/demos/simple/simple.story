@@ -1,4 +1,4 @@
-JavaOne 2011 Demos - Simple
+JavaOne 2011 Demos - Simple RPN Calculator Story
 
 Meta:
 @author aaronwalker
@@ -12,8 +12,11 @@ using an RPN style calculator
 Scenario: Basic Arithmetic - addition of two numbers
 
 Given I am a math geek who likes RPN style calculators
-When I add 4 and 5
+When I enter 4
+And I enter 5
+And I press add
 Then the result is 9
+
 
 
 

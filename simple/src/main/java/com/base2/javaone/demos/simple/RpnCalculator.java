@@ -11,6 +11,7 @@ import static java.util.Arrays.asList;
  * @author aaronwalker
  */
 public class RpnCalculator {
+
     private final List<Number> stack = new ArrayList<Number>();
     private static final List<String> OPS = asList("-", "+", "*", "/");
 

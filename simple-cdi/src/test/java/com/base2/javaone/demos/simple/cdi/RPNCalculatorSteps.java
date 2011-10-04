@@ -4,6 +4,10 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.weld.WeldStep;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -14,8 +18,10 @@ import static org.junit.Assert.assertThat;
  *
  * @author aaronwalker
  */
+@WeldStep @Singleton
 public class RPNCalculatorSteps {
 
+    @Inject
     private RpnCalculator calculator;
 
     @Given("I am a math geek who likes RPN style calculators")

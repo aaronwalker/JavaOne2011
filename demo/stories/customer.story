@@ -8,6 +8,7 @@ Narrative:
 In order to manage customer records
 as a Customer Service Operator
 I want to be able to create, edit and delete customer records
+and notify the billing system of any changes to customers
 
 Scenario: Create a new customer record
 
@@ -16,7 +17,7 @@ And I click on the Create New link
 When I create customers the following:
 |firstname|lastname|
 |Aaron|Walker|
-|Mauro|Talevi|
+|Dan|North|
 Then a new customer record should have been created
-And I Should receive a customer update event on the testQueue queue for each created customer
+And the billing system should receive a customer create event on the testQueue for each created customer
 

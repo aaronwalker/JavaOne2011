@@ -32,6 +32,11 @@ public class RPNCalculatorSteps  {
         calculator.push("+");
     }
 
+    @When("I press subtract")
+    public void subtract() {
+        calculator.push("-");
+    }
+
     @Then("the result is %expectedResult")
     public void assertResult(@Named("no1") Number expectedResult) {
         assertThat(calculator.value().longValue(),equalTo(expectedResult));

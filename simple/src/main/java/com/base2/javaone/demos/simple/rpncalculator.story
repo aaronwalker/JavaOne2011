@@ -17,6 +17,14 @@ And I enter 5
 And I press add
 Then the result is 9
 
+Scenario: Basic Arithmetic - subtraction of two numbers
+
+Given I am a math geek who likes RPN style calculators
+When I enter 9
+And I enter 4
+And I press subtract
+Then the result is 5
+
 
 
 

@@ -34,7 +34,7 @@ public class CustomerSteps {
     private CustomerPage customerPage;
 
     @Inject
-    private JMSReceiver jms;
+    JMSReceiver jms;
 
     private List<String> customerIds = new ArrayList<String>();
 
@@ -67,14 +67,11 @@ public class CustomerSteps {
         }
     }
 
-    @Then("I Should receive a customer update event on the %updateQueue queue for each created customer")
-    public void receiveCustomerMessgae(@Named("updateQueue") String queueName) throws JMSException {
+    @Then("the billing system should receive a customer create event on the %queue for each created customer")
+    public void verifyBillingCustomer(@Named("queue")String queue) {
         for(String customerId : customerIds) {
-            Message message = jms.receiveMessage(queueName);
-            assertThat(message, is(notNullValue()));
-            assertThat(message, instanceOf(TextMessage.class));
-            TextMessage tm = (TextMessage)message;
-            assertThat(tm.getText(),equalTo("Customer:" + customerId + " created"));
+            TextMessage msg = (TextMessage)jms.receiveMessage(queue);
+            assertThat(msg,is(notNullValue()));
         }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.base2.javaone</groupId>
@@ -10,13 +11,13 @@
     <name>JavaOne 2011 Demo: Parent</name>
     <description>Demos for Session 24421 - Java EE Behave!: Behavior-Driven Development with Java EE</description>
     <url>https://github.com/aaronwalker/JavaOne2011</url>
-    
+
     <scm>
         <connection>scm:git@github.com:aaronwalker/JavaOne2011.git</connection>
         <developerConnection>scm:git@github.com:aaronwalker/JavaOne2011.git</developerConnection>
         <url>https://github.com/aaronwalker/JavaOne2011</url>
     </scm>
-    
+
     <developers>
         <developer>
             <id>aaronwalker</id>
@@ -30,7 +31,7 @@
         <module>simple-cdi</module>
         <module>demo</module>
     </modules>
-    
+
     <properties>
         <slf4j.version>1.5.10</slf4j.version>
         <log4j.version>1.2.14</log4j.version>
@@ -43,14 +44,18 @@
         <selenium.version>2.7.0</selenium.version>
         <javax.jms.version>1.1</javax.jms.version>
         <hornetq.version>2.2.7.Final</hornetq.version>
+        <hornetq.netty.version>3.2.3.Final</hornetq.netty.version>
         <jboss-jms-api.version>1.1.0.GA</jboss-jms-api.version>
+        <ejb.version>3.0</ejb.version>
+        <jboss.ejb.version>1.1.0</jboss.ejb.version>
+        <jnp-client.version>5.0.3.GA</jnp-client.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>    
-    
+    </properties>
+
     <dependencies>
-    	<!-- DO NOT add additional depenencies here. The only dependencies allowed here a for logging  -->
-    	<!-- Any module level dependencies should be added at module level with an entry in the    -->
-    	<!-- dependencyManagement block of the appropriate parent -->
+        <!-- DO NOT add additional depenencies here. The only dependencies allowed here a for logging  -->
+        <!-- Any module level dependencies should be added at module level with an entry in the    -->
+        <!-- dependencyManagement block of the appropriate parent -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -68,7 +73,7 @@
             </exclusions>
         </dependency>
     </dependencies>
-    
+
     <dependencyManagement>
         <dependencies>
 
@@ -81,31 +86,31 @@
                 <scope>test</scope>
             </dependency>
 
-             <dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-core</artifactId>
-				<version>${hamcrest.version}</version>
-				<scope>provided</scope>
-			</dependency>
-
-             <dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-library</artifactId>
-				<version>${hamcrest.version}</version>
-				<scope>provided</scope>
-			</dependency>
-
-             <dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-integration</artifactId>
-				<version>${hamcrest.version}</version>
-				<scope>provided</scope>
-			</dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>provided</scope>
+            </dependency>
 
             <dependency>
-				<groupId>org.jbehave</groupId>
-				<artifactId>jbehave-core</artifactId>
-				<version>${jbehave.version}</version>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-integration</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-core</artifactId>
+                <version>${jbehave.version}</version>
                 <scope>provided</scope>
                 <exclusions>
                     <exclusion>
@@ -121,23 +126,23 @@
                         <artifactId>hamcrest-integration</artifactId>
                     </exclusion>
                 </exclusions>
-			</dependency>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jbehave</groupId>
-				<artifactId>jbehave-weld</artifactId>
-				<version>${jbehave.version}</version>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-weld</artifactId>
+                <version>${jbehave.version}</version>
                 <scope>provided</scope>
-			</dependency>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jbehave</groupId>
-				<artifactId>jbehave-core</artifactId>
-				<version>${jbehave.version}</version>
-				<classifier>resources</classifier>
-				<type>zip</type>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-core</artifactId>
+                <version>${jbehave.version}</version>
+                <classifier>resources</classifier>
+                <type>zip</type>
                 <scope>provided</scope>
-			</dependency>
+            </dependency>
 
             <dependency>
                 <groupId>org.codehaus.cargo</groupId>
@@ -173,10 +178,50 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.hornetq</groupId>
+                <artifactId>hornetq-jms-client</artifactId>
+                <version>${hornetq.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.netty</groupId>
+                <artifactId>netty</artifactId>
+                <version>${hornetq.netty.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hornetq</groupId>
+                <artifactId>hornetq-core-client</artifactId>
+                <version>${hornetq.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.ejb</groupId>
+                <artifactId>ejb-api</artifactId>
+                <version>${ejb.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.ejb3</groupId>
+                <artifactId>jboss-ejb3-ext-api</artifactId>
+                <version>${jboss.ejb.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.naming</groupId>
+                <artifactId>jnp-client</artifactId>
+                <version>${jnp-client.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
-   <build>
+    <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
@@ -202,10 +247,10 @@
                 </executions>
                 <configuration>
                     <rules>
-                    	<requireMavenVersion>
-                    	<!-- require Maven 3.0+ to run the build -->
-                    		<version>3.0</version>
-                    	</requireMavenVersion>
+                        <requireMavenVersion>
+                            <!-- require Maven 3.0+ to run the build -->
+                            <version>3.0</version>
+                        </requireMavenVersion>
                         <requireJavaVersion>
                             <!-- require JDK 1.6 to run the build -->
                             <version>[1.6,)</version>
@@ -241,24 +286,24 @@
                     <version>${jbehave.version}</version>
                 </plugin>
             </plugins>
-        </pluginManagement>        
- 	</build>
- 	
+        </pluginManagement>
+    </build>
+
     <repositories>
-		<repository>
-			<id>codehaus-snapshot</id>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<url>http://nexus.codehaus.org/content/groups/snapshots-group</url>
-		</repository>
-		<repository>
-			<id>codehaus</id>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<url>http://nexus.codehaus.org/content/groups/public</url>
-		</repository>
+        <repository>
+            <id>codehaus-snapshot</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>http://nexus.codehaus.org/content/groups/snapshots-group</url>
+        </repository>
+        <repository>
+            <id>codehaus</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>http://nexus.codehaus.org/content/groups/public</url>
+        </repository>
         <repository>
             <id>jboss-public-repository</id>
             <name>JBoss Repository</name>
@@ -271,15 +316,15 @@
             </snapshots>
         </repository>
     </repositories>
-    
+
     <pluginRepositories>
-    	<pluginRepository>
-			<id>codehaus-snapshot</id>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<url>http://nexus.codehaus.org/content/repositories/snapshots</url>
-    	</pluginRepository>
+        <pluginRepository>
+            <id>codehaus-snapshot</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>http://nexus.codehaus.org/content/repositories/snapshots</url>
+        </pluginRepository>
         <pluginRepository>
             <id>jboss-public-repository</id>
             <name>JBoss Repository</name>
@@ -292,5 +337,5 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-    
+
 </project>

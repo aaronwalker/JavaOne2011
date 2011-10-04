@@ -66,48 +66,36 @@
         <dependency>
             <groupId>org.jboss.javaee</groupId>
             <artifactId>jboss-jms-api</artifactId>
-            <version>1.1.0.GA</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.hornetq</groupId>
             <artifactId>hornetq-jms-client</artifactId>
-            <version>${hornetq.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.netty</groupId>
             <artifactId>netty</artifactId>
-            <version>3.2.3.Final</version>
         </dependency>
 
         <dependency>
             <groupId>org.hornetq</groupId>
             <artifactId>hornetq-core-client</artifactId>
-            <version>${hornetq.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.ejb</groupId>
             <artifactId>ejb-api</artifactId>
-            <version>3.0</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.ejb3</groupId>
             <artifactId>jboss-ejb3-ext-api</artifactId>
-            <version>1.1.0</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.naming</groupId>
             <artifactId>jnp-client</artifactId>
-            <version>5.0.3.GA</version>
         </dependency>
 
     </dependencies>

@@ -41,6 +41,9 @@
         <cargo.version>1.1.2</cargo.version>
         <jboss-as7.version>7.0.2.Final</jboss-as7.version>
         <selenium.version>2.7.0</selenium.version>
+        <javax.jms.version>1.1</javax.jms.version>
+        <hornetq.version>2.2.7.Final</hornetq.version>
+        <jboss-jms-api.version>1.1.0.GA</jboss-jms-api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>    
     
@@ -162,7 +165,14 @@
                 <artifactId>selenium-java</artifactId>
                 <version>${selenium.version}</version>
             </dependency>
-    
+
+            <dependency>
+                <groupId>org.jboss.javaee</groupId>
+                <artifactId>jboss-jms-api</artifactId>
+                <version>${jboss-jms-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

@@ -1,6 +1,8 @@
 package com.base2.javaone.demo.steps;
 
+import com.base2.javaone.demo.jms.JMSReceiver;
 import com.base2.javaone.demo.pages.CustomerPage;
+import org.hamcrest.Matchers;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -10,11 +12,14 @@ import org.jbehave.core.model.ExamplesTable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -27,6 +32,9 @@ public class CustomerSteps {
 
     @Inject
     private CustomerPage customerPage;
+
+    @Inject
+    private JMSReceiver jms;
 
     private List<String> customerIds = new ArrayList<String>();
 
@@ -56,6 +64,17 @@ public class CustomerSteps {
     public void verifyCustomer() {
         for(String customerId : customerIds) {
             customerPage.verifyCustomer(customerId);
+        }
+    }
+
+    @Then("I Should receive a customer update event on the %updateQueue queue for each created customer")
+    public void receiveCustomerMessgae(@Named("updateQueue") String queueName) throws JMSException {
+        for(String customerId : customerIds) {
+            Message message = jms.receiveMessage(queueName);
+            assertThat(message, is(notNullValue()));
+            assertThat(message, instanceOf(TextMessage.class));
+            TextMessage tm = (TextMessage)message;
+            assertThat(tm.getText(),equalTo("Customer:" + customerId + " created"));
         }
     }
 }

@@ -1,9 +1,14 @@
 package com.base2.javaone.demo.view;
+
 import java.util.List;
 import java.util.ArrayList;
-   
+
+import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.jms.ConnectionFactory;
 
 import com.base2.javaone.demo.domain.Customer;
 import org.metawidget.forge.navigation.MenuItem;
@@ -11,116 +16,102 @@ import org.metawidget.forge.persistence.PaginationHelper;
 import org.metawidget.forge.persistence.PersistenceUtil;
 import org.jboss.seam.transaction.Transactional;
 
-@Transactional @Named
+@Transactional
+@Named
 @RequestScoped
-public class CustomerBean extends PersistenceUtil implements MenuItem
-{
-   private static final long serialVersionUID = 1L;
-   
-   private List<Customer> list = null;
-   private Customer customer = new Customer();
-   private long id = 0;
-   private PaginationHelper<Customer> pagination;		
-   
-   public Class<?> getItemType()
-   {
-      return Customer.class;
-   }
-   
-   public String getLiteralPath()
-   {
-      return null;
-   }
+public class CustomerBean extends PersistenceUtil implements MenuItem {
+    private static final long serialVersionUID = 1L;
 
-   public String getLabel()
-   {
-      return null;
-   }
+    private List<Customer> list = null;
+    private Customer customer = new Customer();
+    private long id = 0;
+    private PaginationHelper<Customer> pagination;
 
-   public void load()
-   {
-      customer = findById(Customer.class, id);
-   }
-   
-   public String create()
-   {
-      create(customer);
-      return "view?faces-redirect=true&id=" + customer.getId();
-   }
+    @Inject
+    Event<Customer> customerEvent;
 
-   public String delete()
-   {
-      delete(customer);
-      return "list?faces-redirect=true";
-   }
 
-   public String save()
-   {
-      save(customer);
-      return "view?faces-redirect=true&id=" + customer.getId();
-   }
+    public Class<?> getItemType() {
+        return Customer.class;
+    }
 
-   public long getId()
-   {
-      return id;
-   }
+    public String getLiteralPath() {
+        return null;
+    }
 
-   public void setId(long id)
-   {
-      this.id = id;
-      if(id>0){
-			load();
-	  }	
-   }
-   
-   public Customer getCustomer()
-   {
-      return customer;
-   }
+    public String getLabel() {
+        return null;
+    }
 
-   public void setCustomer(Customer customer)
-   {
-      this.customer = customer;
-   }
+    public void load() {
+        customer = findById(Customer.class, id);
+    }
 
-   public List<Customer> getList()
-   {
-      if(list == null)
-      {
-         list = getPagination().createPageDataModel();
-      }
-      return list;
-   }
+    public String create() {
+        create(customer);
+        customerEvent.fire(customer);
+        return "view?faces-redirect=true&id=" + customer.getId();
+    }
 
-   public void setList(List<Customer> list)
-   {
-      this.list = list;
-   }
-  
-   public PaginationHelper<Customer> getPagination() 
-   {
-		if (pagination == null) 
-		{
-			pagination = new PaginationHelper<Customer>(10) 
-			{
-				@Override
-				public int getItemsCount() {
-					return count(Customer.class);
-				}
+    public String delete() {
+        delete(customer);
+        return "list?faces-redirect=true";
+    }
 
-				@Override
-				public List<Customer> createPageDataModel() 
-				{
-					return new ArrayList<Customer>(findAll(Customer.class,
-							 getPageFirstItem(), getPageSize() ));
-				}
-			};
-		}
-		return pagination;
-	}
+    public String save() {
+        save(customer);
+        return "view?faces-redirect=true&id=" + customer.getId();
+    }
 
-   public void setPagination(final PaginationHelper<Customer> helper)
-   {
-      pagination = helper;
-   }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+        if (id > 0) {
+            load();
+        }
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Customer> getList() {
+        if (list == null) {
+            list = getPagination().createPageDataModel();
+        }
+        return list;
+    }
+
+    public void setList(List<Customer> list) {
+        this.list = list;
+    }
+
+    public PaginationHelper<Customer> getPagination() {
+        if (pagination == null) {
+            pagination = new PaginationHelper<Customer>(10) {
+                @Override
+                public int getItemsCount() {
+                    return count(Customer.class);
+                }
+
+                @Override
+                public List<Customer> createPageDataModel() {
+                    return new ArrayList<Customer>(findAll(Customer.class,
+                            getPageFirstItem(), getPageSize()));
+                }
+            };
+        }
+        return pagination;
+    }
+
+    public void setPagination(final PaginationHelper<Customer> helper) {
+        pagination = helper;
+    }
 }

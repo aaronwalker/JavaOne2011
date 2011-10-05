@@ -25,6 +25,16 @@ And I enter 4
 And I press subtract
 Then the result is 5
 
+Scenario: Basic Arithmetic - addition and subtraction
+
+Given I am a math geek who likes RPN style calculators
+When I enter 9
+And I enter 5
+And I press add
+And I enter 14
+And I press subtract
+Then the result is 0
+
 
 
 
